@@ -48,4 +48,33 @@ class ProductsProvider with ChangeNotifier {
   List<Product> get items {
     return [..._item];
   }
+
+  void addProduct(Product currentProduct) {
+    final newProduct = Product(
+        id: DateTime.now().toString(),
+        title: currentProduct.title,
+        description: currentProduct.description,
+        price: currentProduct.price,
+        imageUrl: currentProduct.imageUrl);
+    _item.add(newProduct);
+    notifyListeners();
+  }
+
+  void updateProduct(String productId, Product product) {
+    final producIndex = _item.indexWhere((element) => element.id == productId);
+    if (producIndex >= 0) {
+      _item[producIndex] = product;
+      notifyListeners();
+    } else {
+      print('....');
+    }
+  }
+
+  void deleteProduct(BuildContext ct, String id) {
+    _item.removeWhere((element) => element.id == id);
+    ScaffoldMessenger.of(ct).showSnackBar(
+        const SnackBar(content: Text('Product Deleted Sucessfully')));
+
+    notifyListeners();
+  }
 }

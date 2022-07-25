@@ -46,11 +46,12 @@ class ProductItem extends StatelessWidget {
                         color: Theme.of(context).colorScheme.secondary),
                   );
                 }),
-                Text(
-                  product.title,
-                  overflow: TextOverflow.visible,
-                  maxLines: 1,
-                  style: const TextStyle(color: Colors.white),
+                Flexible(
+                  child: Text(
+                    product.title,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: Colors.white),
+                  ),
                 ),
                 IconButton(
                     onPressed: () {
